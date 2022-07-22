@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -23,12 +24,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 @Data
 @Entity
 @Builder
 @NoArgsConstructor
+@RequiredArgsConstructor
 @AllArgsConstructor
 public class Animal {
 
@@ -36,16 +40,22 @@ public class Animal {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@NonNull
+	@Size(max = 50)
 	@Length(max = 50)
 	private String color;
 
+	@NonNull
+	@Size(max = 50)
 	@Length(max = 50)
 	private String name;
 
+	@NonNull
 	@Enumerated(EnumType.STRING)
 	private Sex sex;
 
 	@Valid
+	@NonNull
 	@ManyToOne
 	private Specie specie;
 

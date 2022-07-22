@@ -1,4 +1,4 @@
-package fr.diginamic.sandbox.controllers;
+package fr.diginamic.sandbox.rest.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,20 +16,20 @@ import fr.diginamic.sandbox.utils.models.Animal;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/animal")
+@RequestMapping("/api/animal")
 public class AnimalController {
 
 	@Autowired
 	private AnimalService service;
 
 	@GetMapping("/hello")
-	public Mono<String> sayHello(@RequestParam(value = "name", required = false) final String name) {
+	public Mono<String> sayHello(@RequestParam(required = false) final String name) {
 		return Mono.just(name != null ? "hello " + name : "wait, who are you again ?");
 	}
 
-	@GetMapping("")
+	@GetMapping
 	public Mono<List<Animal>> getAll() {
-		return Mono.just(service.findAll());
+		return Mono.just(service.getAll());
 	}
 
 	@GetMapping("/{id}")

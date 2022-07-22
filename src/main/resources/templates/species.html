@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sandbox</title>
+	<link rel="stylesheet" th:href="@{css/main.css}">
+	<link rel="icon" th:href="@{assets/favicon.ico}" type="image/x-icon">
+</head>
+
+<body class="flex center">
+	<table>
+		<caption>my species</caption>
+		<thead>
+			<tr>
+				<th>common name</th>
+				<th>latin name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each=" specie : ${species}">
+				<td th:text="${specie.commonName}"></td>
+				<td th:text="${specie.latinName}"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+
+</html>

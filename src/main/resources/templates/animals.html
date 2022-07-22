@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Animals</title>
+	<link rel="stylesheet" th:href="@{css/main.css}">
+	<link rel="icon" th:href="@{assets/favicon.ico}" type="image/x-icon">
+</head>
+
+<body class="flex center">
+	<table>
+		<caption>my animals</caption>
+		<thead>
+			<tr>
+				<th>name</th>
+				<th>color</th>
+				<th>sex</th>
+				<th>specie</th>
+				<th>action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<form th:object="${animal}" th:action="@{/animals}" method="post">
+				<tr>
+					<td>
+						<label for="name">Nom :</label>
+						<input type="text" th:field="*{name}" />
+						<span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</span>
+					</td>
+					<td>
+						<label for="color">Couleur :</label>
+						<input type="text" th:field="*{color}" />
+						<span class="error" th:if="${#fields.hasErrors('color')}" th:errors="*{color}">Error</span>
+					</td>
+					<td>
+						<label for="sex">Sexe :</label>
+						<select th:field="*{sex}">
+							<option th:value="F">Femelle</option>
+							<option th:value="M">Mâle</option>
+						</select>
+						<span class="error" th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}">Error</span>
+					</td>
+					<td>
+						<label for="specie">Espèce :</label>
+						<select th:field="*{specie}">
+							<option th:each="specie : ${specieList}" th:text="${specie.commonName}" th:value="${specie.id}"></option>
+						</select>
+						<span class="error" th:if="${#fields.hasErrors('specie')}" th:errors="*{specie}">Error</span>
+					</td>
+					<td>
+						<button type="submit">Sauver</button>
+					</td>
+				</tr>
+			</form>
+			<tr th:each=" animal : ${animalList}">
+				<td th:text="${animal.name}"></td>
+				<td th:text="${animal.color}"></td>
+				<td th:text="${animal.sex}"></td>
+				<td th:object="${animal.specie}">
+					<span th:text="*{commonName}"></span>
+					<span th:text="*{latinName}"></span>
+				</td>
+				<td>
+					<a th:href="@{'/animals/update/' + ${animal.id}}">Update</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+
+</html>

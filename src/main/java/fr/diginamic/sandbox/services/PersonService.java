@@ -1,5 +1,7 @@
 package fr.diginamic.sandbox.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import fr.diginamic.sandbox.repositories.PersonRepository;
@@ -16,5 +18,9 @@ public class PersonService {
 
 	public Person findPerson(final Integer id) {
 		return repository.findById(id).orElseThrow();
+	}
+
+	public List<Person> findAllOwners(final Integer animalId) {
+		return repository.findByAnimals_Id(animalId);
 	}
 }

@@ -2,6 +2,8 @@ package fr.diginamic.sandbox.services;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Service;
 
 import fr.diginamic.sandbox.repositories.AnimalRepository;
@@ -11,17 +13,12 @@ import fr.diginamic.sandbox.utils.models.Animal;
 public class AnimalService {
 
 	private final AnimalRepository repository;
-	private final SpecieService specieService;
-	private final PersonService personService;
 
-	protected AnimalService(final AnimalRepository animalRepository, final SpecieService specieService,
-			final PersonService personService) {
+	protected AnimalService(final AnimalRepository animalRepository) {
 		repository = animalRepository;
-		this.specieService = specieService;
-		this.personService = personService;
 	}
 
-	public List<Animal> findAll() {
+	public List<Animal> getAll() {
 		return repository.findAll();
 	}
 
@@ -30,14 +27,18 @@ public class AnimalService {
 	}
 
 	public List<Animal> findLastTwo(final String commonName) {
-		return repository.findFirst2BySpecieOrderByNameDesc(specieService.findCommonName(commonName));
+		return repository.findFirst2BySpecie_CommonNameOrderByNameDesc(commonName);
 	}
 
-	public List<Animal> findByOwner(final Integer id) {
-		return repository.findByPersons(personService.findPerson(id));
+	public List<Animal> findByOwner(final Integer ownerId) {
+		return repository.findByPersons_Id(ownerId);
 	}
 
 	public List<Animal> findAnimalsOfColors(final List<String> colors) {
 		return repository.findByColorIn(colors);
+	}
+
+	public Animal persist(@Valid final Animal animal) {
+		return repository.save(animal);
 	}
 }

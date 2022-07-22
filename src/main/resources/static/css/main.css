@@ -1,0 +1,141 @@
+* {
+	margin: 0;
+	padding: 0;
+	width: auto;
+	height: auto;
+	border: none;
+	position: relative;
+	box-sizing: border-box;
+	color: white;
+	background-color: darkslategray;
+	font-family: 'Fira Sans', sans-serif;
+}
+
+/* 
+quick facade classes, use to quickly set elements behaviour
+*/
+.push-right {
+	margin-right: auto;
+}
+
+.elevate {
+	transition: 0.1s ease-out;
+}
+
+.elevate:hover {
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+	transition: 0.1s ease-in;
+}
+
+.flex {
+	display: flex;
+}
+
+/* below classes requires above flex class or {display: flex} on the element */
+.row {
+	flex-direction: row;
+}
+
+.column {
+	flex-direction: column;
+}
+
+.start {
+	justify-content: flex-start;
+}
+
+.end {
+	justify-content: flex-end;
+}
+
+.justify {
+	justify-content: space-between;
+}
+
+.distribute {
+	justify-content: space-evenly;
+}
+
+.center {
+	justify-content: center;
+}
+
+.align {
+	align-items: center;
+}
+
+.wrap {
+	flex-wrap: wrap;
+}
+
+/* setting up basic tags generic styles */
+html,
+body {
+	float: left;
+	height: 100%;
+	width: 100%;
+}
+
+table {
+	background-color: antiquewhite;
+	color: black;
+}
+
+table,
+caption,
+thead,
+tbody,
+tr,
+form,
+th,
+td,
+span,
+a {
+	border: 1px solid white;
+	border-collapse: collapse;
+}
+
+table,
+caption,
+thead,
+tbody,
+tr,
+form {
+	width: 100%;
+}
+
+caption,
+tr,
+form,
+th,
+td,
+span,
+a {
+	line-height: 50px;
+	height: 50px;
+}
+
+a,
+button {
+	font-weight: bold;
+	text-decoration: none;
+	vertical-align: middle;
+	text-align: center;
+	display: inline-block;
+}
+
+a:hover,
+button:hover {
+	background-color: white;
+	color: darkslategray;
+}
+
+span {
+	display: inline-block;
+}
+
+.error {
+	color: red;
+	border: 1px solid red;
+	background-color: pink;
+}

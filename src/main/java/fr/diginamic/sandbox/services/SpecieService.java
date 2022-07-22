@@ -1,5 +1,7 @@
 package fr.diginamic.sandbox.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import fr.diginamic.sandbox.repositories.SpecieRepository;
@@ -18,4 +20,11 @@ public class SpecieService {
 		return repository.findFirstByCommonName(commonName).orElseThrow();
 	}
 
+	public List<Specie> getAll() {
+		return repository.findAll();
+	}
+
+	public Specie findSpecie(final Integer id) {
+		return repository.findById(id).orElseThrow();
+	}
 }
