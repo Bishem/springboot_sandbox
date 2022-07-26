@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.diginamic.sandbox.repositories.AnimalRepository;
@@ -12,11 +13,8 @@ import fr.diginamic.sandbox.utils.models.Animal;
 @Service
 public class AnimalService {
 
-	private final AnimalRepository repository;
-
-	protected AnimalService(final AnimalRepository animalRepository) {
-		repository = animalRepository;
-	}
+	@Autowired
+	private AnimalRepository repository;
 
 	public List<Animal> getAll() {
 		return repository.findAll();
