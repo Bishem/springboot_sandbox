@@ -1,4 +1,4 @@
-package fr.diginamic.sandbox.aspects;
+package fr.diginamic.sandbox.utils.aspects;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;

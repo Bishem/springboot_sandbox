@@ -1,4 +1,4 @@
-package fr.diginamic.sandbox.rest.controllers;
+package fr.diginamic.sandbox.controllers.rest;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

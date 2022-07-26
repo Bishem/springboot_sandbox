@@ -1,4 +1,4 @@
-package fr.diginamic.sandbox.mvc.controllers;
+package fr.diginamic.sandbox.controllers.mvc;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;

@@ -1,4 +1,4 @@
-package fr.diginamic.sandbox.rest.controllers;
+package fr.diginamic.sandbox.controllers.rest;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;

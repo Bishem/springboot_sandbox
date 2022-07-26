@@ -1,4 +1,4 @@
-package fr.diginamic.sandbox.rest.controllers;
+package fr.diginamic.sandbox.controllers.rest;
 
 import java.util.ArrayList;
 import java.util.List;
