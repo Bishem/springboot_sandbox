@@ -32,12 +32,12 @@ public class PersonService {
 
 	public Person save(@Valid final PersonBean bean) {
 		Assert.isNull(bean.getId(), "id must be null");
-		return repository.save(convertToModel(bean));
+		return repository.save(modelOf(bean));
 	}
 
 	public Person update(@Valid final PersonBean bean) {
 		Assert.notNull(bean.getId(), "id must not be null");
-		return repository.save(updateModel(repository.findById(bean.getId()).orElseThrow(), bean));
+		return repository.save(updatedFrom(bean));
 	}
 
 	public void remove(final Integer id) {
@@ -45,7 +45,7 @@ public class PersonService {
 	}
 
 	// FIXME: not scalable, find a way to streamline the process, model mapper ?
-	private Person convertToModel(@Valid final PersonBean bean) {
+	private Person modelOf(@Valid final PersonBean bean) {
 
 		final var person = Person.builder();
 
@@ -65,7 +65,9 @@ public class PersonService {
 	}
 
 	// FIXME: memory hog needs optimizing ASAP
-	private Person updateModel(@Valid final Person person, @Valid final PersonBean bean) {
+	private Person updatedFrom(@Valid final PersonBean bean) {
+
+		final var person = repository.findById(bean.getId()).orElseThrow();
 
 		if (bean.getAge() != null) person.setAge(bean.getAge());
 		if (bean.getFirstname() != null) person.setFirstname(bean.getFirstname());
