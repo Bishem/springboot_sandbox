@@ -12,17 +12,11 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class LoggingAspect {
 
-	@Before("execution(* *(..))")
+	@Before("execution(* fr.diginamic.sandbox..*.*(..))")
 	public void logBeforeMethodExecution(final JoinPoint joinPoint) {
-		final var surrentMethod = joinPoint.getSignature().getName();
-		final var currentClass = joinPoint.getClass().getSimpleName();
-		log.info("i was in {0} method in {1} class", surrentMethod, currentClass);
+		final var signature = joinPoint.getSignature();
+		final var method = signature.getName();
+		final var clazz = signature.getDeclaringTypeName();
+		log.info("i was in {} method in {} class", method, clazz);
 	}
-
-//	@Around("(public *(..))")
-//	public void checkPerformance() {
-//
-//		final Object executionTime = null;
-//		log.debug("i took {} to finish", executionTime);
-//	}
 }

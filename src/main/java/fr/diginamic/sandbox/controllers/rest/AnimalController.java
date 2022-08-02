@@ -1,6 +1,5 @@
 package fr.diginamic.sandbox.controllers.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +26,14 @@ public class AnimalController {
 		return Mono.just(name != null ? "hello " + name : "wait, who are you again ?");
 	}
 
-	@GetMapping
-	public Mono<List<Animal>> getAll() {
-		return Mono.just(service.getAll());
+	@GetMapping("/{id}")
+	public Mono<Animal> get(@PathVariable final Integer id) {
+		return Mono.just(service.findAnimal(id));
 	}
 
-	@GetMapping("/{id}")
-	public Mono<Animal> getAnimal(@PathVariable final Integer id) {
-		return Mono.just(service.findAnimal(id));
+	@GetMapping
+	public Mono<List<Animal>> getAll() {
+		return Mono.just(service.findAll());
 	}
 
 	@GetMapping("/lastTwo")
@@ -43,12 +42,13 @@ public class AnimalController {
 	}
 
 	@GetMapping("/ownedBy")
-	public Mono<List<Animal>> getByOwner(@RequestParam final Integer id) {
+	public Mono<List<Animal>> getOwnedBy(@RequestParam final Integer id) {
 		return Mono.just(service.findByOwner(id));
 	}
 
+	// must check how to sent a generic list of resources in a post request body
 	@GetMapping("/colors")
-	public Mono<List<Animal>> getAnimalsOfColors(@RequestBody final ArrayList<String> colors) {
+	public Mono<List<Animal>> getAllOfColors(@RequestBody final List<String> colors) {
 		return Mono.just(service.findAnimalsOfColors(colors));
 	}
 }

@@ -20,7 +20,7 @@ public class SpeciesController {
 
 	@GetMapping
 	public Mono<String> getMethodName(final Model model) {
-		model.addAttribute("species", specieService.getAll());
+		model.addAttribute("species", specieService.findAll());
 		return Mono.just("species");
 	}
 }

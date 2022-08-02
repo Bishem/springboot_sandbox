@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import fr.diginamic.sandbox.services.AnimalService;
 import fr.diginamic.sandbox.services.SpecieService;
 import fr.diginamic.sandbox.utils.models.Animal;
-import fr.diginamic.sandbox.utils.models.Specie;
 import reactor.core.publisher.Mono;
 
 @Controller
@@ -33,11 +32,11 @@ public class AnimalsController {
 
 	@GetMapping
 	public Mono<String> getAll(final Model model) {
-		model.addAttribute("animalList", animalService.getAll());
-		model.addAttribute("specieList", specieService.getAll());
-		final var newAnimal = new Animal();
-		newAnimal.setSpecie(new Specie());
-		model.addAttribute("animal", newAnimal);
+		model.addAttribute("animalList", animalService.findAll());
+		model.addAttribute("specieList", specieService.findAll());
+//		final var newAnimal = new Animal();
+//		newAnimal.setSpecie(new Specie());
+//		model.addAttribute("animal", newAnimal);
 		return Mono.just(AnimalsController.ANIMALS);
 	}
 
@@ -45,14 +44,13 @@ public class AnimalsController {
 	@PostMapping
 	public Mono<String> add(@Valid @ModelAttribute final Animal animal, final Errors errors, final Model model) {
 
-		model.addAttribute("animalList", animalService.getAll());
-		model.addAttribute("specieList", specieService.getAll());
+		model.addAttribute("animalList", animalService.findAll());
+		model.addAttribute("specieList", specieService.findAll());
 
 		if (errors.hasErrors()) {
-			return Mono.just(AnimalsController.ANIMALS);
 		}
 
-		animalService.persist(animal);
+//		animalService.save(animal);
 		return Mono.just(AnimalsController.ANIMALS);
 	}
 
